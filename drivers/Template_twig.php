@@ -15,6 +15,10 @@ class Template_twig extends CI_Driver {
 		  'cache' => APPPATH.'cache/twig',
 		  'auto_reload' => ENVIRONMENT=='development'?TRUE:FALSE
 		));
+		$functions = get_defined_functions();
+		foreach ($functions['user'] as $func) {
+			$twig->addFunction($func, new Twig_Function_Function($func));
+		}
 		$html = $twig->render($file, (array)$vars);
 
 		if ($return) {
