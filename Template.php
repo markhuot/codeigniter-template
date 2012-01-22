@@ -20,7 +20,14 @@ class Template extends CI_Driver_Library {
 	public function render($view, $data=array(), $return=FALSE) {
 		$ci =& get_instance();
 		$format = $ci->uri->format_from_uri($view);
-		$this->{$format}->render($view, $data, $return);
+
+		try {
+			$this->{$format}->render($view, $data, $return);
+		}
+
+		catch (Exception $e) {
+			show_error($e->getMessage());
+		}
 	}
 
 	public function responds_to($format) {
