@@ -13,6 +13,7 @@ class Template_twig extends CI_Driver {
 		$loader = new Twig_Loader_Filesystem(APPPATH.'views');
 		$twig = new Twig_Environment($loader, array(
 		  'cache' => APPPATH.'cache/twig',
+		  'auto_reload' => ENVIRONMENT=='development'?TRUE:FALSE
 		));
 		$html = $twig->render($file, (array)$vars);
 
